@@ -18,19 +18,20 @@ const START_SERVER = () => {
         message: "Hello ae nhieeu",
       });
     } catch (error) {
-        next(error)
+      next(error)
     }
   });
 
   app.use('/api/products', require('./routes/product.routes'))
   app.use('/api/address', require('./routes/address.routes'))
+  app.use('/api/categories', require('./routes/category.routes'));
 
   app.use((err, req, res, next) => {
-    if(err){
-        res.status(err.status).json({
-            status: err.status,
-            message: err.messaged
-        })
+    if (err) {
+      res.status(err.status).json({
+        status: err.status,
+        message: err.messaged
+      })
     }
   })
 
