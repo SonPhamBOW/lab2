@@ -51,16 +51,16 @@ exports.getProductById = async (req, res, next) => {
 
 exports.updateProduct = async (req, res, next) => {
   try {
-    const { id } = req.params; 
-    const updateData = req.body; 
+    const { id } = req.params;
+    const updateData = req.body;
 
     if (!id) {
       return res.status(400).json({ message: "Product ID is required" });
     }
 
     const updatedProduct = await Product.findOneAndUpdate(
-      { _id: id }, 
-      updateData, 
+      { _id: id },
+      updateData,
       { new: true, runValidators: true }
     );
 
@@ -74,6 +74,31 @@ exports.updateProduct = async (req, res, next) => {
     });
   } catch (error) {
     console.error("Error updating product:", error);
+    next(error);
+  }
+};
+
+// need to fix this function
+exports.deleteProduct = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+
+    if (!id) {
+      return res.status(400).json({ message: "Invalid Product ID" });
+    }
+
+    const deletedProduct = await Product.findOneAndDelete({ _id: id }, { new: true });
+
+    if (!deletedProduct) {
+      return res.status(404).json({ message: "Product not found" });
+    }
+
+    res.status(200).json({
+      message: `Product ID: ${id} deleted successfully`,
+      result: deletedProduct,
+    });
+  } catch (error) {
+    console.error("Error deleting product:", error);
     next(error);
   }
 };
