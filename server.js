@@ -23,7 +23,8 @@ const START_SERVER = () => {
   });
 
   app.use('/api/products', require('./routes/product.routes'))
-  
+  app.use('/api/address', require('./routes/address.routes'))
+
   app.use((err, req, res, next) => {
     if(err){
         res.status(err.status).json({
