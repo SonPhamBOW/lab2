@@ -1,16 +1,18 @@
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
 
 const categorySchema = new mongoose.Schema({
     name: {
         type: String,
-        required: [true, 'Name is required'], 
-        maxLength: [50, 'Name cant not be greater or equal than 50 chars'],
+        required: [true, 'Category name is required'],
+        trim: true,
+        maxLength: [50, 'Category name cannot exceed 50 characters'],
+        unique: true
     },
     description: {
         type: String,
-        required: [true, 'Description is required'], 
-        maxLength: [250, 'Description cant not be greater or equal than 250 chars'],
-    } 
-})
+        trim: true,
+        maxLength: [255, 'Description cannot exceed 255 characters']
+    }
+});
 
-module.exports = mongoose.model("Category", categorySchema)
+module.exports = mongoose.model("Category", categorySchema);
