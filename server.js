@@ -3,14 +3,14 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const morgan = require("morgan");
 const connectDB = require("./config/db");
-require('dotenv').config()
+require("dotenv").config();
 
 const app = express();
 
 const START_SERVER = () => {
   app.use(cors());
   app.use(bodyParser.json());
-  app.use(morgan('dev'));
+  app.use(morgan("dev"));
 
   app.get("/", async (req, res, next) => {
     try {
@@ -18,28 +18,27 @@ const START_SERVER = () => {
         message: "Hello ae nhieeu",
       });
     } catch (error) {
-      next(error)
+      next(error);
     }
   });
-
-  app.use('/api/products', require('./routes/product.routes'))
-  app.use('/api/address', require('./routes/address.routes'))
-  app.use('/api/categories', require('./routes/category.routes'));
+  app.use("/api/customer", require("./routes/customer.routes"));
+  app.use("/api/products", require("./routes/product.routes"));
+  app.use("/api/address", require("./routes/address.routes"));
+  app.use("/api/categories", require("./routes/category.routes"));
 
   app.use((err, req, res, next) => {
     if (err) {
       res.status(err.status).json({
         status: err.status,
-        message: err.messaged
-      })
+        message: err.messaged,
+      });
     }
-  })
+  });
 
   app.listen(process.env.PORT, () => {
     console.log(`Server running on ${process.env.PORT}`);
-    connectDB()
+    connectDB();
   });
-
 };
 
 START_SERVER();

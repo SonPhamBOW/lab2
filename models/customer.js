@@ -2,9 +2,9 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 
 const customerSchema = new mongoose.Schema({
-  name: { 
-    type: String,  
-    maxLength: [50, "Name cannot be greater than 50 characters"] 
+  name: {
+    type: String,
+    maxLength: [50, "Name cannot be greater than 50 characters"],
   },
   email: {
     type: String,
@@ -13,7 +13,7 @@ const customerSchema = new mongoose.Schema({
     maxLength: [50, "Email cannot be greater than 50 characters"],
     match: [/.+@.+\..+/, "Please enter a valid email address"],
   },
-  
+
   password: {
     type: String,
     required: [true, "Password is required"],
