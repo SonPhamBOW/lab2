@@ -125,6 +125,31 @@ class AuthController {
       next(error);
     }
   }
+  static async updateProfile(req, res, next) {
+    try {
+      const customer = req.users_decode.customer;
+      const { name, phone, address } = req.body;
+      customer.name = name;
+      customer.phone = phone;
+      customer.address = address;
+      await customer.save();
+
+      res.status(200).json({
+        message: "Profile updated successfully",
+        data: {
+          customer: {
+            _id: customer._id,
+            name: customer.name,
+            email: customer.email,
+            phone: customer.phone,
+            address: customer.address,
+          },
+        },
+      });
+    } catch (error) {
+      next(error);
+    }
+  }
 }
 
 module.exports = AuthController;
