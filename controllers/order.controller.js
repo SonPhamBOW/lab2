@@ -21,7 +21,29 @@ exports.createNewOrder = async (req, res, next) => {
 };
 
 exports.getAllOrder = async (req, res, next) => {
-    
+    try {
+        const customerId = req.users_decode.customer._id;
+        const orders = await Order.find({customer: customerId})
+        if(orders)
+            res.status(200).json({
+                "message":"get all order successful",
+                "order": orders    
+            })
+        else
+            res.status(404).json({
+                "message":"you need add product to order"
+            })     
+    } catch (error) {
+        next(error)
+    }
 };
 
-exports.updateStatusOrder = async (req, res, next) => {};
+exports.updateStatusOrder = async (req, res, next) => {
+    try {
+        const id = req.params.id
+        const {status , paymentStatus} = req.body;
+
+    } catch (error) {
+        
+    }
+};
