@@ -25,6 +25,7 @@ const START_SERVER = () => {
   app.use("/api/products", require("./routes/product.routes"));
   app.use("/api/address", require("./routes/address.routes"));
   app.use("/api/categories", require("./routes/category.routes"));
+  app.use("api/orders",require('./routes/order.routes'));
 
   app.use((err, req, res, next) => {
     if (err) {
