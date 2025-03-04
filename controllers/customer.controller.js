@@ -80,7 +80,7 @@ class AuthController {
         });
       }
 
-      const token = jwt.sign(
+      const access_token = jwt.sign(
         {
           id: customer._id,
           email: customer.email,
@@ -88,6 +88,11 @@ class AuthController {
         process.env.JWT_SECRET,
         { expiresIn: "1d" }
       );
+
+      const { password: pwd, ...customerWithoutPassword } = customer.toObject();
+      req.users_decode = {
+        customer: customerWithoutPassword,
+      };
 
       res.status(200).json({
         message: "Login successful",
@@ -97,7 +102,23 @@ class AuthController {
             name: customer.name,
             email: customer.email,
           },
-          token,
+          access_token,
+        },
+      });
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  static async getProfile(req, res, next) {
+    try {
+      const customer = req.users_decode.customer.toObject();
+      const { password, ...customerWithoutPassword } = customer;
+
+      res.status(200).json({
+        message: "Profile fetched successfully",
+        data: {
+          customer: customerWithoutPassword,
         },
       });
     } catch (error) {
