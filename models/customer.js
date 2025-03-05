@@ -5,28 +5,28 @@ const customerSchema = new mongoose.Schema(
   {
     name: {
       type: String,
-      maxLength: [50, "Tên không được vượt quá 50 ký tự"],
+      maxLength: [50, "Name cannot exceed 50 characters"],
     },
     email: {
       type: String,
-      required: [true, "Email là bắt buộc"],
+      required: [true, "Email is required"],
       unique: true,
-      maxLength: [50, "Email không được vượt quá 50 ký tự"],
-      match: [/.+@.+\..+/, "Vui lòng nhập địa chỉ email hợp lệ"],
+      maxLength: [50, "Email must not exceed 50 characters"],
+      match: [/.+@.+\..+/, "Please enter a valid email address"],
     },
     password: {
       type: String,
-      required: [true, "Mật khẩu là bắt buộc"],
-      minLength: [8, "Mật khẩu phải có ít nhất 8 ký tự"],
+      required: [true, "Password is required"],
+      minLength: [8, "Password must be at least 8 characters"],
     },
     phone: {
       type: String,
-      match: [/^\d{10,15}$/, "Số điện thoại phải từ 10-15 chữ số"],
+      match: [/^\d{10,15}$/, "Phone number must be 10-15 digits"],
     },
     address: {
       street: {
         type: String,
-        maxLength: [50, "Địa chỉ không được vượt quá 50 ký tự"],
+        maxLength: [50, "Address cannot exceed 50 characters"],
         trim: true,
       },
       city: {
@@ -43,7 +43,7 @@ const customerSchema = new mongoose.Schema(
       },
       zipCode: {
         type: String,
-        match: [/^\d{5,10}$/, "Mã ZIP phải từ 5-10 chữ số"],
+        match: [/^\d{5,10}$/, "ZIP code must be 5-10 digits"],
       },
     },
   },
