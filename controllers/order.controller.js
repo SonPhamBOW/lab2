@@ -1,20 +1,34 @@
 const Order = require("../models/order");
-
+const Product = require("../models/product");
 exports.createNewOrder = async (req, res, next) => {
   try {
     const { products } = req.body;
     const customerId = req.users_decode.customer._id;
-    const totalPrice = products.reduce(
-      (acc, p) => acc + p.quantity * p.priceAtPurchase,
-      0
-    );
-    const newOrder = new Order({ customerId, products, totalPrice });
-    await newOrder.save().then((newDoc) => {
-      res.status(201).json({
-        message: "Create new order successful",
-        result: newOrder,
-      });
-    });
+    const stockProduct = await Product.findById(products.product) ;
+    if(stockProduct > products.quantity){
+
+        const newStock = stockProduct - products.quantity;
+
+        const updateStockProduct = await Product.updateOne(
+            {_id: products.product},
+            newStock
+        )
+
+        const totalPrice = products.reduce(
+            (acc, p) => acc + p.quantity * p.priceAtPurchase,
+            0
+          );
+          const newOrder = new Order({ customerId, products, totalPrice });
+          await newOrder.save().then((newDoc) => {
+            res.status(201).json({
+              message: "Create new order successful",
+              result: newOrder,
+            });
+          });
+    }else{
+
+    }
+    
   } catch (error) {
     next(error);
   }
