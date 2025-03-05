@@ -1,21 +1,39 @@
-const express = require('express')
-const { getAllProduct, createNewProduct, getProductById, updateProduct, deleteProduct} = require('../controllers/product.controller')
+const express = require("express");
+const {
+  getAllProduct,
+  createNewProduct,
+  getProductById,
+  updateProduct,
+  deleteProduct,
+  getProductsByCategoryId,
+  getProductsByName,
+  getProductsByPrice,
+} = require("../controllers/product.controller");
 
-const router = express.Router()
+const router = express.Router();
 
-// GET: /all - Get all products
-router.get('/all', getAllProduct)
+// GET: / - Get all products
+router.get("/", getAllProduct);
 
-// GET: /:id - Get product by Id
-router.get('/:id', getProductById)
+// GET: /:productId - Get product by Id
+router.get("/:productId", getProductById);
 
-// POST: / - Create new product
-router.post('/', createNewProduct)
+// GET: /:productId - Get product by Id
+router.get("/category/:categoryId", getProductsByCategoryId);
 
-// PUT: / - update product
-router.put('/:id', updateProduct)
+// POST: /create - Create new product
+router.post("/create", createNewProduct);
 
-// DELETE: / - delete product
-router.delete('/:id', deleteProduct)
+// PUT: /update/:productId - update product
+router.put("/update/:productId", updateProduct);
 
-module.exports = router
+// DELETE: /delete/:productId - delete product
+router.delete("/delete/:productId", deleteProduct);
+
+// GET: /products/name/:name - Get product by name
+router.get('/products/name/:name', getProductsByName);
+
+// GET: /products/price?minPrice=10&maxPrice=50 - Get products by price range
+router.get('/products/price', getProductsByPrice);
+
+module.exports = router;
