@@ -129,16 +129,53 @@ class AuthController {
     try {
       const customer = req.users_decode.customer;
       const { name, phone, address } = req.body;
-      customer.name = name;
-      customer.phone = phone;
-      customer.address = address;
+
+      if (!name && !phone && !address) {
+        return res.status(400).json({
+          message: "No updated data",
+        });
+      }
+
+      if (name) {
+        customer.name = name;
+      }
+
+      if (phone) {
+        customer.phone = phone;
+      }
+
+      if (address) {
+        if (!customer.address) {
+          customer.address = {};
+        }
+
+        if (address.street !== undefined) {
+          customer.address.street = address.street;
+        }
+
+        if (address.city !== undefined) {
+          customer.address.city = address.city;
+        }
+
+        if (address.state !== undefined) {
+          customer.address.state = address.state;
+        }
+
+        if (address.country !== undefined) {
+          customer.address.country = address.country;
+        }
+
+        if (address.zipCode !== undefined) {
+          customer.address.zipCode = address.zipCode;
+        }
+      }
+
       await customer.save();
 
       res.status(200).json({
-        message: "Profile updated successfully",
+        message: "Profile update successful",
         data: {
           customer: {
-            _id: customer._id,
             name: customer.name,
             email: customer.email,
             phone: customer.phone,
@@ -147,7 +184,19 @@ class AuthController {
         },
       });
     } catch (error) {
-      next(error);
+      console.error("Profile Update Error:", error);
+
+      if (error.name === "ValidationError") {
+        return res.status(400).json({
+          message: "Authentication Error",
+          errors: Object.values(error.errors).map((err) => err.message),
+        });
+      }
+
+      res.status(500).json({
+        message: "Internal Server Error",
+        error: error.message,
+      });
     }
   }
 }
