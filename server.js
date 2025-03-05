@@ -4,7 +4,7 @@ const bodyParser = require("body-parser");
 const morgan = require("morgan");
 const connectDB = require("./config/db");
 require("dotenv").config();
-
+const errorHandler = require("./middlewares/errorHandler.middlwares");
 const app = express();
 
 const START_SERVER = () => {
@@ -21,11 +21,12 @@ const START_SERVER = () => {
       next(error);
     }
   });
+  app.use(errorHandler);
   app.use("/api/customer", require("./routes/customer.routes"));
   app.use("/api/products", require("./routes/product.routes"));
   app.use("/api/address", require("./routes/address.routes"));
   app.use("/api/categories", require("./routes/category.routes"));
-  app.use("api/orders",require('./routes/order.routes'));
+  app.use("api/orders", require("./routes/order.routes"));
 
   app.use((err, req, res, next) => {
     if (err) {

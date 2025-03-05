@@ -1,0 +1,94 @@
+{
+    "products": [
+        {
+            "name": "Gaming Laptop",
+            "price": 99,
+            "stock": 10,
+            "category": "67bea2122cec5cd8e482eba8"
+        },
+        {
+            "name": "Smartphone",
+            "price": 95,
+            "stock": 15,
+            "category": "67bea2122cec5cd8e482eba8"
+        },
+        {
+            "name": "Wireless Headphones",
+            "price": 85,
+            "stock": 20,
+            "category": "67bea2122cec5cd8e482eba8"
+        },
+        {
+            "name": "Gaming Console",
+            "price": 99,
+            "stock": 8,
+            "category": "67bea2122cec5cd8e482eba9"
+        },
+        {
+            "name": "Mechanical Keyboard",
+            "price": 45,
+            "stock": 25,
+            "category": "67bea2122cec5cd8e482eba9"
+        },
+        {
+            "name": "Gaming Mouse",
+            "price": 30,
+            "stock": 30,
+            "category": "67bea2122cec5cd8e482eba9"
+        },
+        {
+            "name": "Microwave Oven",
+            "price": 75,
+            "stock": 12,
+            "category": "67bea2122cec5cd8e482ebaa"
+        },
+        {
+            "name": "Vacuum Cleaner",
+            "price": 90,
+            "stock": 10,
+            "category": "67bea2122cec5cd8e482ebaa"
+        },
+        {
+            "name": "Air Purifier",
+            "price": 80,
+            "stock": 18,
+            "category": "67bea2122cec5cd8e482ebaa"
+        },
+        {
+            "name": "Ergonomic Office Chair",
+            "price": 70,
+            "stock": 14,
+            "category": "67bea2122cec5cd8e482ebab"
+        },
+        {
+            "name": "Standing Desk",
+            "price": 85,
+            "stock": 9,
+            "category": "67bea2122cec5cd8e482ebab"
+        },
+        {
+            "name": "Printer",
+            "price": 50,
+            "stock": 20,
+            "category": "67bea2122cec5cd8e482ebab"
+        },
+        {
+            "name": "Smartwatch",
+            "price": 95,
+            "stock": 22,
+            "category": "67bea2122cec5cd8e482ebac"
+        },
+        {
+            "name": "Fitness Tracker",
+            "price": 85,
+            "stock": 18,
+            "category": "67bea2122cec5cd8e482ebac"
+        },
+        {
+            "name": "VR Headset",
+            "price": 100,
+            "stock": 5,
+            "category": "67bea2122cec5cd8e482ebac"
+        }
+    ]
+}

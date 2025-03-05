@@ -7,4 +7,5 @@ router.post("/register", AuthController.register);
 router.post("/login", AuthController.login);
 
 router.get("/profile", AccessTokenValidator, AuthController.getProfile);
+router.patch("/profile", AccessTokenValidator, AuthController.updateProfile);
 module.exports = router;

@@ -1,7 +1,7 @@
 const Category = require("../models/category");
 const Product = require("../models/product");
 
-// 🏷 Lấy tất cả danh mục
+// Lấy tất cả danh mục
 exports.getAllCategory = async (req, res, next) => {
   try {
     const categories = await Category.find();
@@ -41,7 +41,7 @@ exports.getCategoryById = async (req, res, next) => {
   }
 };
 
-// ➕ Thêm danh mục mới
+// Thêm danh mục mới
 exports.addCategory = async (req, res, next) => {
   try {
     let { name, description } = req.body;
